@@ -1,0 +1,10 @@
+[Unit]
+Description=IP2LocationService: Creates and externally facing REST service (running on port 8124) that accepts an IP address to GET /ip2location/getcoor/<ip>
+After=network.target
+           
+[Service]
+Type=forking
+ExecStart=/opt/IP2LocationService/venv/bin/python /opt/IP2LocationService/search_ip_db.py
+           
+[Install]
+WantedBy=default.target
