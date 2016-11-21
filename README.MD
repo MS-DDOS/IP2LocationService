@@ -24,7 +24,7 @@ Instead of using a traditional database, this system capitalizes on the nature o
 To increase the ease of use this service has been wrapped as a Flask REST service. Unfortunately adding HTTP to our project causes our service to take quite a performance hit. After adding the REST wrapper query time was slowed to around 12ms per query, still much much better than before, but considerably slower than the 76 microseconds we were able to get without the interface. Additionally the entire service is packaged as an RPM using FPM ([Effing Package Management](https://github.com/jordansissel/fpm)) so that a user can simply use Yum to install the service. Finally the service is deployed as a Red Hat/Cent/Fedora system level service. This means you can bring it up using commands like:
 
 ```bash
-systemctl ip2loc.service start
+systemctl start ip2loc.service
 ```
 
 In order to get the service running you will need to add a python virutal environment to the working directory such that
@@ -67,7 +67,7 @@ sudo yum localinstall IP2LocationService
 
 6.) Start the service!
 ```bash
-sudo systemctl ip2loc.service start
+sudo systemctl start ip2loc.service
 ```
 
 7.) Query the service and get results!
