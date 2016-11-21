@@ -73,22 +73,25 @@ sudo systemctl start ip2loc.service
 
 7.) Query the service and get results!
 ```bash
-curl 127.0.0.1:5000/ip2location/getcoor/172.168.0.24
+curl 127.0.0.1:5000/ip2location/getcoor/172.217.3.206
 ```
+
+Yep...that *is* google.
+
 ```json
 {
   "type": "success",
   "result": {
-    "ip_from": 2896690944,
-    "ip_to": 2896692991,
+    "ip_from": 2899902464,
+    "ip_to": 2899967999,
     "country_code": "US",
     "country_name": "United States",
-    "region_name": "Virginia",
-    "city_name": "Dulles",
-    "latitude": 38.997708,
-    "longitude": -77.433179,
-    "zip_code": "20166",
-    "time_zone": "-04:00"
+    "region_name": "California",
+    "city_name": "Mountain View",
+    "latitude": 37.405992,
+    "longitude": -122.078515,
+    "zip_code": "94043",
+    "time_zone": "-07:00"
   }
 }
 ```
