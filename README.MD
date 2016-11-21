@@ -1,5 +1,5 @@
 # Ip2Location Database Wrapper Service
-Ip2Location databases are commonly used in cyber security and anomaly detection, marketing and numerous other industries for converting IP addresses into physical location. IP2Loc provides a number of free and paid databases that offer varying degrees of precision and data set features.
+Ip2Location databases are commonly used in cyber security, anomaly detection, marketing and numerous other industries for converting IP addresses into physical location. IP2Loc provides a number of free and paid databases that offer varying degrees of precision and data set features.
 
 On their website they give some examples of how to use their CSV or BIN databases with systems like MySQL. To this we must first convert an IPv4 address into its longform integer representation. This is technique is extremely common and widely used but the gist is:
 
@@ -21,7 +21,7 @@ The code in this repository aims to improve on lookup performance so that IP2Loc
 
 Instead of using a traditional database, this system capitalizes on the nature of the data. This system builds a single contiguous array of keys and then performs a binary search over the keys to return a result. It takes on average 22 operations to find the data that we are looking for and returns this information in as little as 76 micro seconds. This is orders of magnitude faster. However it should be noted that in its current form, this service runs **directly** on Flask. This is **not** acceptable for production. I still need to wrap the whole thing in a production strength reverse-proxy like NGINX. Which I will do at some point in the future...Still after load testing I was able to get almost 2,000 queries per second through the service without it keeling over and dying.
 
-To increase the ease of use this service has been wrapped as a Flask REST service. Unfortunately adding HTTP to our project causes our service to take quite a performance hit. After adding the REST wrapper query time was slowed to around 12ms per query, still much much better than before, but considerably slower than the 76 microseconds we were able to get without the interface. Additionally the entire service is packaged as an RPM using FPM ([Effing Package Management](https://github.com/jordansissel/fpm)) so that a user can simply use Yum to install the service. Finally the service is deployed as a Red Hat/Cent/Fedora system level service. This means you can bring it up using commands like:
+To increase the ease of use this service has been wrapped as a Flask REST service. Unfortunately adding HTTP to our project causes our service to take quite a performance hit. After adding the REST wrapper query time was slowed to around 12ms per query, still much much better than before, but considerably slower than the 76 microseconds we were able to get without the interface. Additionally the entire service is packaged as an RPM using FPM ([Effing Package Management](https://github.com/jordansissel/fpm)) so that a user can simply use Yum to install the service. Finally the service is deployed as a Red Hat/Cent/Fedora system level service (Because of this, repackaging using FPM for Debian or another system probably won't work). This means you can bring it up using commands like:
 
 ```bash
 systemctl start ip2loc.service
@@ -64,6 +64,7 @@ fpm -n ip2locService -s dir -t rpm --prefix /opt/ --directories /opt/IP2Location
 ```bash
 sudo yum localinstall IP2LocationService
 ```
+The default install location is ```/opt/```
 
 6.) Start the service!
 ```bash
