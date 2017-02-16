@@ -27,7 +27,7 @@ To increase the ease of use this service has been wrapped as a Flask REST servic
 systemctl start ip2loc.service
 ```
 
-In order to get the service running you will need to add a python virutal environment to the working directory such that
+In order to get the service running you will need to add a python virtual environment to the working directory such that
 
 ```
 IP2LocationService/venv/
